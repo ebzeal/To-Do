@@ -4,7 +4,7 @@ A simple RESTful API for a to-do list.
 Live version:  http://mock-pl-api.herokuapp.com/api/v1/
 
 # Documentation
-
+http://localhost:5000/api/v1/docs/
 
 # Prerequisites
 
