@@ -1,4 +1,4 @@
-import { Todo } from './todo';
-import { User } from './user';
+import { Todo } from '../todos/entities/todo';
+import { User } from '../users/user';
 
 export { Todo, User };

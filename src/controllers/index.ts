@@ -1,3 +1,3 @@
-import TodoController from './todoController';
+import TodoController from '../todos/todoController';
 
 export { TodoController };

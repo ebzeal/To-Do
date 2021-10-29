@@ -1,4 +1,5 @@
-import { User } from './user';
+import { TodoStatusType } from './../types/todo.types';
+import { User } from '../../users/user';
 import {
     Entity,
     PrimaryGeneratedColumn,
@@ -21,8 +22,12 @@ export class Todo {
     @Column()
     description?: string;
 
-    @Column()
-    completed!: boolean;
+    @Column({
+      type: 'enum',
+      enum: Object.values(TodoStatusType),
+      default: TodoStatusType["in-progress"],
+    })
+    status?: TodoStatusType;
 
     @JoinColumn({ name: 'user_id' })
     @ManyToOne(() => User, (user) => user.todos, {
