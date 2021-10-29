@@ -1,15 +1,12 @@
 FROM node:12
 
-# Create app directory
-RUN mkdir -p /usr/src/to-do-app
-WORKDIR /usr/src/to-do-app
+WORKDIR /app
 
-# Install app dependencies
-COPY package.json /usr/src/to-do-app
+COPY package*.json ./
+
 RUN npm install
 
-# Bundle app source
-COPY . /usr/src/to-do-app
+COPY . .
 
 EXPOSE 5000
 

@@ -1,4 +1,3 @@
-import TodoController from "./todoController";
+import TodoController from './todoController';
 
-
-export {TodoController}
+export { TodoController };
