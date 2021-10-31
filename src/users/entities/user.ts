@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
-import { Todo } from '../models';
+import { Todo } from '../../models';
 
 @Entity('user')
 export class User {
@@ -7,15 +7,20 @@ export class User {
     id!: number;
 
     @Column()
-    firstName!: string;
+    userName!: string;
 
-    @Column()
-    lastName!: string;
+    @Column({ nullable: true })
+    fullName?: string;
 
     @Column()
     email!: string;
 
-    @OneToMany(() => Todo, (todo: Todo) => todo.owner)
+    @Column()
+    password!: string;
+
+    @OneToMany(() => Todo, (todo: Todo) => todo.owner, {
+        eager: false,
+    })
     todos!: Todo[];
 
     @CreateDateColumn()

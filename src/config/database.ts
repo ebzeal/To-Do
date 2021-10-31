@@ -1,6 +1,10 @@
 import { ConnectionOptions } from 'typeorm';
 import { Todo, User } from '../models';
 
+import env from 'dotenv';
+
+env.config();
+
 const config: ConnectionOptions = {
     type: 'postgres',
     host: process.env.POSTGRES_HOST || 'localhost',
