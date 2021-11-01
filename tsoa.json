@@ -4,6 +4,16 @@
   "spec": {
     "outputDirectory": "public",
     "specVersion": 3,
-    "basePath": "/api/v1"
+    "basePath": "/api/v1",
+    "securityDefinitions": {
+      "jwt": {
+          "type": "jwt",
+          "name": "access_token",
+          "in": "query"
+      }
+  }
+  },
+  "routes": {
+    "authenticationModule": "./src/auth/middlewares/accessMidlleware.ts"
   }
 }

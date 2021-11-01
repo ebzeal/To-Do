@@ -1,5 +1,5 @@
 import { TodoStatusType } from './../types/todo.types';
-import { User } from '../../users/user';
+import { User } from '../../users/entities/user';
 import {
     Entity,
     PrimaryGeneratedColumn,
@@ -19,21 +19,22 @@ export class Todo {
     @Column()
     name!: string;
 
-    @Column()
+    @Column({ nullable: true })
     description?: string;
 
     @Column({
-      type: 'enum',
-      enum: Object.values(TodoStatusType),
-      default: TodoStatusType["in-progress"],
+        type: 'enum',
+        enum: Object.values(TodoStatusType),
+        default: TodoStatusType['in-progress'],
     })
     status?: TodoStatusType;
 
     @JoinColumn({ name: 'user_id' })
-    @ManyToOne(() => User, (user) => user.todos, {
-        eager: true,
-    })
+    @ManyToOne(() => User, (user) => user.todos, { eager: true })
     owner!: User;
+
+    @Column({ type: 'date', nullable: false, default: () => "CURRENT_DATE + INTERVAL '1 DAY'" })
+    dueDate?: Date;
 
     @CreateDateColumn()
     createdAt!: Date;
