@@ -7,12 +7,16 @@ export interface ErrorInterface {
 }
 
 export interface PayloadInterface {
-    userId: number;
+    id: number;
     userName: string;
     fullName?: string;
     email: string;
 }
 
+export interface UserTokenRequestInterface extends Request {
+    user?: string | JwtPayload;
+}
+
 export interface UserAuthInfoRequestInterface extends Request {
-    user: string | JwtPayload;
+    user?: PayloadInterface;
 }

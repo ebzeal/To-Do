@@ -31,7 +31,7 @@ export default class AuthService {
             });
 
             const payload = {
-                userId: newUser.id,
+                id: newUser.id,
                 userName: newUser.userName,
                 fullName: newUser.fullName,
                 email: newUser.email,
@@ -61,7 +61,7 @@ export default class AuthService {
             }
 
             const payload = {
-                userId: getUser[0].id,
+                id: getUser[0].id,
                 userName: getUser[0].userName,
                 fullName: getUser[0].fullName,
                 email: getUser[0].email,

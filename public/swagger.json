@@ -24,7 +24,8 @@
 						"type": "string"
 					},
 					"fullName": {
-						"type": "string"
+						"type": "string",
+						"example": "fullName is optional"
 					},
 					"email": {
 						"type": "string"
@@ -48,7 +49,8 @@
 			"LoginUserInterface": {
 				"properties": {
 					"userNameOrEmail": {
-						"type": "string"
+						"type": "string",
+						"example": "This could be either the userName or the email"
 					},
 					"password": {
 						"type": "string"
@@ -61,20 +63,177 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"GetToDO": {
+			"TodoStatusType": {
+				"enum": [
+					"in-progress",
+					"completed"
+				],
+				"type": "string"
+			},
+			"Todo": {
 				"properties": {
-					"message": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"status": {
+						"$ref": "#/components/schemas/TodoStatusType"
+					},
+					"owner": {
+						"$ref": "#/components/schemas/User"
+					},
+					"dueDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"deletedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"owner",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"User": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"userName": {
+						"type": "string"
+					},
+					"fullName": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"todos": {
+						"items": {
+							"$ref": "#/components/schemas/Todo"
+						},
+						"type": "array"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"userName",
+					"email",
+					"password",
+					"todos",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AddTodoInterface": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string",
+						"example": "description is optional"
+					},
+					"dueDate": {
+						"type": "string",
+						"example": "dueDate is optional, but if added, it must have a YYYY-MM-DD format"
+					}
+				},
+				"required": [
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PayloadInterface": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"userName": {
+						"type": "string"
+					},
+					"fullName": {
+						"type": "string"
+					},
+					"email": {
 						"type": "string"
 					}
 				},
 				"required": [
-					"message"
+					"id",
+					"userName",
+					"email"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateTodoInterface": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"status": {
+						"$ref": "#/components/schemas/TodoStatusType"
+					},
+					"dueDate": {
+						"type": "string",
+						"example": "it must have a YYYY-MM-DD format"
+					}
+				},
+				"required": [
+					"status"
 				],
 				"type": "object",
 				"additionalProperties": false
 			}
 		},
-		"securitySchemes": {}
+		"securitySchemes": {
+			"jwt": {
+				"type": "jwt",
+				"name": "access_token",
+				"in": "query"
+			}
+		}
 	},
 	"info": {
 		"title": "spoke-todo-api",
@@ -99,6 +258,13 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/AuthReturnedInterface"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJOYW1lIjoiT2x1IiwiZnVsbE5hbWUiOiJPbHUgU29sYSIsImVtYWlsIjoib2xlQG1lLmNvbSIsImlhdCI6MTYzNTcwMzU5NywiZXhwIjoxNjM1NzQ2Nzk3fQ.OLq3KN-DpQXnB9ttNcu1i_HaMTNA115b7hwZTP277YM"
+										}
+									}
 								}
 							}
 						}
@@ -131,6 +297,13 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/AuthReturnedInterface"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJOYW1lIjoiT2x1IiwiZnVsbE5hbWUiOiJPbHUgU29sYSIsImVtYWlsIjoib2xlQG1lLmNvbSIsImlhdCI6MTYzNTcwMzU5NywiZXhwIjoxNjM1NzQ2Nzk3fQ.OLq3KN-DpQXnB9ttNcu1i_HaMTNA115b7hwZTP277YM"
+										}
+									}
 								}
 							}
 						}
@@ -153,7 +326,7 @@
 				}
 			}
 		},
-		"/todos": {
+		"/todo": {
 			"get": {
 				"operationId": "GetTodos",
 				"responses": {
@@ -162,14 +335,260 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/GetToDO"
+									"anyOf": [
+										{
+											"items": {
+												"$ref": "#/components/schemas/Todo"
+											},
+											"type": "array"
+										},
+										{
+											"type": "string"
+										}
+									]
 								}
 							}
 						}
 					}
 				},
+				"tags": [
+					"Todos"
+				],
 				"security": [],
-				"parameters": []
+				"parameters": [
+					{
+						"in": "query",
+						"name": "status",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/TodoStatusType"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "AddTodo",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/Todo"
+										},
+										{
+											"type": "string"
+										}
+									]
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"name": "Check Data",
+											"description": "",
+											"id": 22,
+											"dueDate": "2021-11-01T14:10:40.369Z",
+											"createdAt": "2021-11-01T14:10:40.369Z",
+											"updatedAt": "2021-11-01T14:10:40.369Z"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Todos"
+				],
+				"security": [
+					{
+						"jwt": [
+							"admin"
+						]
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"allOf": [
+									{
+										"$ref": "#/components/schemas/AddTodoInterface"
+									},
+									{
+										"properties": {
+											"userInfo": {
+												"$ref": "#/components/schemas/PayloadInterface"
+											}
+										},
+										"required": [
+											"userInfo"
+										],
+										"type": "object"
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"/todo/{id}": {
+			"get": {
+				"operationId": "GetTodo",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Todo"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Todos"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"patch": {
+				"operationId": "UpdateTodos",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/Todo"
+										},
+										{
+											"type": "string"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Todos"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"allOf": [
+									{
+										"$ref": "#/components/schemas/UpdateTodoInterface"
+									},
+									{
+										"properties": {
+											"userInfo": {
+												"$ref": "#/components/schemas/PayloadInterface"
+											}
+										},
+										"required": [
+											"userInfo"
+										],
+										"type": "object"
+									}
+								]
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteTodos",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/Todo"
+										},
+										{
+											"type": "string"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Todos"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"allOf": [
+									{
+										"$ref": "#/components/schemas/UpdateTodoInterface"
+									},
+									{
+										"properties": {
+											"userInfo": {
+												"$ref": "#/components/schemas/PayloadInterface"
+											}
+										},
+										"required": [
+											"userInfo"
+										],
+										"type": "object"
+									}
+								]
+							}
+						}
+					}
+				}
 			}
 		}
 	},

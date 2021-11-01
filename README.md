@@ -4,7 +4,8 @@ A simple RESTful API for a to-do list.
 Live version:  http://mock-pl-api.herokuapp.com/api/v1/
 
 # Documentation
-http://localhost:5000/api/v1/docs/
+  https://documenter.getpostman.com/view/6838819/UVByHq8V
+  http://localhost:5000/api/v1/docs/
 
 # Prerequisites
 
@@ -22,7 +23,7 @@ A functional computer
 
 To run unit tests
 
-> yarn test
+> npm run test
 
 These tests ensure that no functionality is broken
 
@@ -34,6 +35,7 @@ TypeScript
 PostgreSQL
 TypeORM
 Docker
+Postman
 Swagger
 Jest
 
