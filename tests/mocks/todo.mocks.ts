@@ -1,5 +1,5 @@
-import { User } from '../../models';
-import { TodoStatusType } from './../types/todo.types';
+import { User } from '../../src/models/';
+import { TodoStatusType } from './../../src/todos/types/todo.types'
 
 const user = new User();
 export const todos = [

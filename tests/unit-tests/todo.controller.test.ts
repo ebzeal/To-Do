@@ -3,10 +3,14 @@ import { Todo } from '../../src/models';
 import TodoController from '../../src/todos/todo.controller';
 import TodoServices from '../../src/todos/todo.services';
 import dbConfig from '../../src/config/database';
-import { todo } from '../../src/todos/mocks/todo.mocks';
+import { todo } from '../mocks/todo.mocks';
 
 beforeAll(async () => {
     await createConnection(dbConfig);
+});
+
+afterEach(() => {
+    jest.resetAllMocks();
 });
 
 afterAll(async () => {
@@ -31,7 +35,7 @@ describe('TodoController', () => {
             const todos = await TodoController.getTodos();
             expect(todos).toEqual(todo);
             expect(spy2).toHaveBeenCalledWith({});
-            expect(spy2).toHaveBeenCalledTimes(2);
+            expect(spy2).toHaveBeenCalledTimes(1);
             spy2.mockRestore();
         });
     });
