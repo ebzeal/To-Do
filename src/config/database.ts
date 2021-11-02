@@ -14,6 +14,7 @@ const config: ConnectionOptions = {
     database: process.env.POSTGRES_DB || 'postgres',
     entities: [Todo, User],
     synchronize: true,
+    ssl: { rejectUnauthorized: false },
 };
 
 export default config;

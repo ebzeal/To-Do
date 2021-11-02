@@ -11,8 +11,8 @@
     "test:watch": "jest --detectOpenHandles --watch",
     "start": "node build/index.js",
     "build": "tsc",
-    "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec\"",
     "prebuild": "npm run swagger",
+    "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec\"",
     "swagger": "tsoa spec",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint-fix": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
