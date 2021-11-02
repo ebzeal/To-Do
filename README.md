@@ -1,23 +1,28 @@
-# To-Do-backend
+# To-Do API
 
 A simple RESTful API for a to-do list.
-Live version:  http://mock-pl-api.herokuapp.com/api/v1/
+- Live version:  https://spokeai-todo-app.herokuapp.com/api/v1
 
 # Documentation
-  https://documenter.getpostman.com/view/6838819/UVByHq8V
-  http://localhost:5000/api/v1/docs/
+ **POSTMAN:** https://documenter.getpostman.com/view/6838819/UVByHq8V
+
+ **SWAGGER DOCS:** https://spokeai-todo-app.herokuapp.com/api/v1/docs/
 
 # Prerequisites
 
 A functional computer
 
-# Installing
+# Installation and Startup
 
 > Git clone the master branch
 
-> run npm install
+## Docker
+ 1. run `docker-compose build`  in the terminal
+ 2. then run `docker-compose up`
 
-> for production code, run npm build
+## Local 
+1. run `npm install`
+2. run `npm run dev`
 
 # Running the tests
 
@@ -29,15 +34,15 @@ These tests ensure that no functionality is broken
 
 # Built With
 
-NodeJs
-Express
-TypeScript
-PostgreSQL
-TypeORM
-Docker
-Postman
-Swagger
-Jest
+- NodeJs
+- Express
+- TypeScript
+- PostgreSQL
+- TypeORM
+- Docker
+- Postman
+- Swagger
+- Jest
 
 # Contributing
 
@@ -49,5 +54,5 @@ We use SemVer for versioning. For the versions available, see the tags on this r
 
 # Authors
 
-Olusola Ajayi
+Olusola Ajayi  -   *ebenezerajayi@gmail.com* 
 

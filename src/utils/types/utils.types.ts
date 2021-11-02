@@ -20,3 +20,14 @@ export interface UserTokenRequestInterface extends Request {
 export interface UserAuthInfoRequestInterface extends Request {
     user?: PayloadInterface;
 }
+
+interface ReturnedData {
+    statusCode: number;
+    message: string;
+    error?: unknown;
+    payload?: unknown;
+}
+export interface ResponseInterface {
+    status: string;
+    data: ReturnedData;
+}

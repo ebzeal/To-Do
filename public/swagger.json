@@ -6,15 +6,38 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"AuthReturnedInterface": {
+			"ReturnedData": {
 				"properties": {
-					"token": {
+					"statusCode": {
+						"type": "number",
+						"format": "double"
+					},
+					"message": {
 						"type": "string"
 					},
-					"error": {
+					"error": {},
+					"payload": {}
+				},
+				"required": [
+					"statusCode",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ResponseInterface": {
+				"properties": {
+					"status": {
 						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/ReturnedData"
 					}
 				},
+				"required": [
+					"status",
+					"data"
+				],
 				"type": "object",
 				"additionalProperties": false
 			},
@@ -69,96 +92,6 @@
 					"completed"
 				],
 				"type": "string"
-			},
-			"Todo": {
-				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
-					"name": {
-						"type": "string"
-					},
-					"description": {
-						"type": "string"
-					},
-					"status": {
-						"$ref": "#/components/schemas/TodoStatusType"
-					},
-					"owner": {
-						"$ref": "#/components/schemas/User"
-					},
-					"dueDate": {
-						"type": "string",
-						"format": "date-time"
-					},
-					"createdAt": {
-						"type": "string",
-						"format": "date-time"
-					},
-					"updatedAt": {
-						"type": "string",
-						"format": "date-time"
-					},
-					"deletedAt": {
-						"type": "string",
-						"format": "date-time"
-					}
-				},
-				"required": [
-					"id",
-					"name",
-					"owner",
-					"createdAt",
-					"updatedAt"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"User": {
-				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
-					"userName": {
-						"type": "string"
-					},
-					"fullName": {
-						"type": "string"
-					},
-					"email": {
-						"type": "string"
-					},
-					"password": {
-						"type": "string"
-					},
-					"todos": {
-						"items": {
-							"$ref": "#/components/schemas/Todo"
-						},
-						"type": "array"
-					},
-					"createdAt": {
-						"type": "string",
-						"format": "date-time"
-					},
-					"updatedAt": {
-						"type": "string",
-						"format": "date-time"
-					}
-				},
-				"required": [
-					"id",
-					"userName",
-					"email",
-					"password",
-					"todos",
-					"createdAt",
-					"updatedAt"
-				],
-				"type": "object",
-				"additionalProperties": false
 			},
 			"AddTodoInterface": {
 				"properties": {
@@ -257,12 +190,17 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/AuthReturnedInterface"
+									"$ref": "#/components/schemas/ResponseInterface"
 								},
 								"examples": {
 									"Example 1": {
 										"value": {
-											"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJOYW1lIjoiT2x1IiwiZnVsbE5hbWUiOiJPbHUgU29sYSIsImVtYWlsIjoib2xlQG1lLmNvbSIsImlhdCI6MTYzNTcwMzU5NywiZXhwIjoxNjM1NzQ2Nzk3fQ.OLq3KN-DpQXnB9ttNcu1i_HaMTNA115b7hwZTP277YM"
+											"status": "success",
+											"data": {
+												"statusCode": 201,
+												"message": "New user created",
+												"payload": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDAsInVzZXJOYW1lIjoiT2x1MTEiLCJmdWxsTmFtZSI6Ik9sdSBTb2xhIiwiZW1haWwiOiJvbHVzQG1lLmNvbSIsImlhdCI6MTYzNTg0NjY2MSwiZXhwIjoxNjM4NDM4NjYxfQ.N4g3lRt7Fc-0Tfm7-xm3018XeUMZ_hdR7wr2N3RD7sM"
+											}
 										}
 									}
 								}
@@ -296,12 +234,17 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/AuthReturnedInterface"
+									"$ref": "#/components/schemas/ResponseInterface"
 								},
 								"examples": {
 									"Example 1": {
 										"value": {
-											"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjUsInVzZXJOYW1lIjoiT2x1IiwiZnVsbE5hbWUiOiJPbHUgU29sYSIsImVtYWlsIjoib2xlQG1lLmNvbSIsImlhdCI6MTYzNTcwMzU5NywiZXhwIjoxNjM1NzQ2Nzk3fQ.OLq3KN-DpQXnB9ttNcu1i_HaMTNA115b7hwZTP277YM"
+											"status": "success",
+											"data": {
+												"statusCode": 200,
+												"message": "Login successful",
+												"payload": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDAsInVzZXJOYW1lIjoiT2x1MTEiLCJmdWxsTmFtZSI6Ik9sdSBTb2xhIiwiZW1haWwiOiJvbHVzQG1lLmNvbSIsImlhdCI6MTYzNTg0NjY2MSwiZXhwIjoxNjM4NDM4NjYxfQ.N4g3lRt7Fc-0Tfm7-xm3018XeUMZ_hdR7wr2N3RD7sM"
+											}
 										}
 									}
 								}
@@ -335,17 +278,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"anyOf": [
-										{
-											"items": {
-												"$ref": "#/components/schemas/Todo"
-											},
-											"type": "array"
-										},
-										{
-											"type": "string"
-										}
-									]
+									"$ref": "#/components/schemas/ResponseInterface"
 								}
 							}
 						}
@@ -374,24 +307,24 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"anyOf": [
-										{
-											"$ref": "#/components/schemas/Todo"
-										},
-										{
-											"type": "string"
-										}
-									]
+									"$ref": "#/components/schemas/ResponseInterface"
 								},
 								"examples": {
 									"Example 1": {
 										"value": {
-											"name": "Check Data",
-											"description": "",
-											"id": 22,
-											"dueDate": "2021-11-02T07:11:40.473Z",
-											"createdAt": "2021-11-02T07:11:40.473Z",
-											"updatedAt": "2021-11-02T07:11:40.473Z"
+											"status": "success",
+											"data": {
+												"statusCode": 200,
+												"message": "Login successful",
+												"payload": {
+													"name": "Check Data",
+													"description": "",
+													"id": 22,
+													"dueDate": "2021-11-02T12:52:25.328Z",
+													"createdAt": "2021-11-02T12:52:25.328Z",
+													"updatedAt": "2021-11-02T12:52:25.328Z"
+												}
+											}
 										}
 									}
 								}
@@ -446,7 +379,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Todo"
+									"$ref": "#/components/schemas/ResponseInterface"
 								}
 							}
 						}
@@ -476,14 +409,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"anyOf": [
-										{
-											"$ref": "#/components/schemas/Todo"
-										},
-										{
-											"type": "string"
-										}
-									]
+									"$ref": "#/components/schemas/ResponseInterface"
 								}
 							}
 						}
@@ -537,14 +463,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"anyOf": [
-										{
-											"$ref": "#/components/schemas/Todo"
-										},
-										{
-											"type": "string"
-										}
-									]
+									"$ref": "#/components/schemas/ResponseInterface"
 								}
 							}
 						}
