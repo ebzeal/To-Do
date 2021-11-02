@@ -6,6 +6,5 @@ module.exports = {
         'test/(.*)': '<rootDir>/test/$1',
     },
     collectCoverage: true,
-    // collectCoverageFrom: ['src/**/*.{js,ts}'],
+    collectCoverageFrom: ['src/**/*.{js,ts}'],
 };
-s

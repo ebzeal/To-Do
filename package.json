@@ -7,15 +7,16 @@
     "node": "12.x"
   },
   "scripts": {
-    "test": "jest --detectOpenHandles",
-    "test:watch": "jest --detectOpenHandles --watch",
+    "test": "NODE_ENV=test jest --detectOpenHandles --forceExit -u --coverage ",
+    "test:watch": "NODE_ENV=test jest -u --coverage --watch",
     "start": "node build/index.js",
     "build": "tsc",
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec\"",
     "prebuild": "npm run swagger",
     "swagger": "tsoa spec",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint-fix": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+    "lint-fix": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+    "test-dbConfig": "./src/models/testDB/configureTest.sh"
   },
   "nodemonConfig": {
     "watch": [
