@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "A simple RESTful API for a to-do list.",
   "main": "index.js",
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
     "test": "jest --detectOpenHandles",
     "test:watch": "jest --detectOpenHandles --watch",
+    "start": "node build/index.js",
     "build": "tsc",
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec\"",
     "prebuild": "npm run swagger",
