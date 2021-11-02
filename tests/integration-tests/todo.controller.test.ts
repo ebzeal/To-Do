@@ -27,7 +27,7 @@ describe('get all todos', () => {
     });
 
     it('should fetch a single todo', async () => {
-      const response = await request.get('/api/v1/todo/31');
+      const response = await request.get('/api/v1/todo/1');
       expect(response.body).toStrictEqual(todos[0]);
   });
 });

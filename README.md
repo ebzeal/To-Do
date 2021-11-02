@@ -25,8 +25,10 @@ A functional computer
 2. run `npm run dev`
 
 # Running the tests
+There are unit and integration tests
 
-To run unit tests
+To run tests, you need to first configure the test DB
+ 1. run `npm run test-dbConfig`
 
 > npm run test
 
