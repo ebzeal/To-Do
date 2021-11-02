@@ -3,7 +3,7 @@ import { Todo } from '../models';
 import { PayloadInterface } from '../utils/types/utils.types';
 import { AddTodoInterface, UpdateTodoInterface, TodoStatusType } from './types/todo.types';
 
-export default class TodoService {
+export default class TodoServices {
     static async addTodo(inputBody: AddTodoInterface & { userInfo: PayloadInterface }): Promise<Todo> {
         try {
             const { name, description, dueDate } = inputBody;
